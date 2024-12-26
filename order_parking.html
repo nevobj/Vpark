@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דף הזמנת חניה</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            margin: 20px;
+            background-color: #f9fafc;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .field {
+            margin-bottom: 15px;
+        }
+        .field label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .field input, .field select {
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .price-info {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="section-title">הזמנת חניה</h1>
+    
+    <div class="field">
+        <label for="parking-lot">שם החניון:</label>
+        <input type="text" id="parking-lot" value="חניון מרכז העיר" readonly>
+    </div>
+    <div class="field">
+        <label for="location">מיקום וכתובת:</label>
+        <input type="text" id="location" value="רחוב ירושלים 20, תל אביב" readonly>
+    </div>
+    <div class="field">
+        <label for="rates">תעריפים:</label>
+        <input type="text" id="rates" value="50 ש"ח לשעה" readonly>
+    </div>
+
+    <div class="field">
+        <label for="reservation-type">בחר סוג הזמנה:</label>
+        <select id="reservation-type">
+            <option value="pre-book">הזמנה מראש</option>
+            <option value="real-time">חניה בזמן אמת</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label for="duration-type">בחר משך חניה:</label>
+        <select id="duration-type">
+            <option value="limited">זמן מוגבל</option>
+            <option value="unlimited">זמן בלתי מוגבל</option>
+        </select>
+    </div>
+
+    <div class="field" id="date-field" style="display:none;">
+        <label for="reservation-date">בחר תאריך (עד שבוע מהיום):</label>
+        <input type="date" id="reservation-date">
+    </div>
+
+    <div class="field" id="start-time-field" style="display:none;">
+        <label for="start-time">בחר שעת התחלה:</label>
+        <input type="time" id="start-time">
+    </div>
+
+    <div class="field" id="end-time-field" style="display:none;">
+        <label for="end-time">בחר שעת סיום:</label>
+        <input type="time" id="end-time">
+    </div>
+
+    <div class="price-info">
+        מחיר משוער: <span id="estimated-price">0</span> ש"ח
+        <p id="unknown-price" style="display:none;">מחיר יינתן בסגירת חניה</p>
+    </div>
+
+    <button class="button" id="book-now">הזמן עכשיו</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const nextWeek = new Date();
+        nextWeek.setDate(today.getDate() + 7);
+
+        const minDate = today.toISOString().split('T')[0];
+        const maxDate = nextWeek.toISOString().split('T')[0];
+        
+        document.getElementById('reservation-date').setAttribute('min', minDate);
+        document.getElementById('reservation-date').setAttribute('max', maxDate);
+    });
+
+    document.getElementById('reservation-type').addEventListener('change', function() {
+        const reservationType = this.value;
+        const dateField = document.getElementById('date-field');
+        const startTimeField = document.getElementById('start-time-field');
+        const endTimeField = document.getElementById('end-time-field');
+        const unknownPrice = document.getElementById('unknown-price');
+
+        if (reservationType === 'pre-book') {
+            dateField.style.display = 'block';
+            startTimeField.style.display = 'block';
+        } else {
+            dateField.style.display = 'none';
+            startTimeField.style.display = 'none';
+            endTimeField.style.display = 'none';
+            unknownPrice.style.display = 'none';
+        }
+    });
+
+    document.getElementById('duration-type').addEventListener('change', function() {
+        const durationType = this.value;
+        const endTimeField = document.getElementById('end-time-field');
+        const unknownPrice = document.getElementById('unknown-price');
+
+        if (durationType === 'limited') {
+            endTimeField.style.display = 'block';
+            unknownPrice.style.display = 'none';
+        } else {
+            endTimeField.style.display = 'none';
+            unknownPrice.style.display = 'block';
+        }
+    });
+
+    document.getElementById('book-now').addEventListener('click', function() {
+    const filePath = "file:///C:/לימודים/יישומי%20איטרנט/editplus/Spark/order_confirmation.html";
+    window.location.href = filePath;
+});
+
+</script>
+
+</body>
+</html>
+
+

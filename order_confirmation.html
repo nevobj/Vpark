@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דף אישור הזמנה</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            margin: 20px;
+            background-color: #f9fafc;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .field {
+            margin-bottom: 15px;
+        }
+        .field label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .field input {
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f1f1f1;
+        }
+        .price-info {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .actions button {
+            width: 48%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="section-title">אישור הזמנת חניה</h1>
+    
+    <div class="field">
+        <label for="parking-lot">שם החניון:</label>
+        <input type="text" id="parking-lot" value="" readonly>
+    </div>
+    <div class="field">
+        <label for="parking-location">מיקום מדויק של החניה:</label>
+        <input type="text" id="parking-location" value="" readonly>
+    </div>
+    <div class="field">
+        <label for="start-time">שעת התחלה:</label>
+        <input type="text" id="start-time" value="" readonly>
+    </div>
+    <div class="field">
+        <label for="end-time">שעת סיום:</label>
+        <input type="text" id="end-time" value="" readonly>
+    </div>
+    <div class="field">
+        <label for="total-price">עלות סופית:</label>
+        <input type="text" id="total-price" value="" readonly>
+    </div>
+    
+    <div class="actions">
+        <button class="button" id="edit-reservation">שנה/בטל הזמנה</button>
+        <button class="button" id="continue-to-payment">המשך לתשלום</button>
+    </div>
+</div>
+
+<script>
+    // שליפת נתונים מה-localStorage
+    document.getElementById('parking-lot').value = localStorage.getItem('parkingLot') || 'לא הוגדר';
+    document.getElementById('parking-location').value = localStorage.getItem('parkingLocation') || 'לא הוגדר';
+    document.getElementById('start-time').value = localStorage.getItem('startTime') || 'לא הוגדר';
+    document.getElementById('end-time').value = localStorage.getItem('endTime') || 'לא הוגדר';
+    document.getElementById('total-price').value = localStorage.getItem('totalPrice') || 'לא הוגדר';
+
+    // מעבר לעמוד שינוי/ביטול הזמנה
+    document.getElementById('edit-reservation').addEventListener('click', function() {
+        window.location.href = 'file:///C:/לימודים/יישומי איטרנט/editplus/Spark/order_parking.html';
+    });
+
+    // מעבר לעמוד תשלום
+    document.getElementById('continue-to-payment').addEventListener('click', function() {
+        window.location.href = 'file:///C:/לימודים/יישומי איטרנט/editplus/Spark/order-payment.html';
+    });
+</script>
+
+</body>
+</html>

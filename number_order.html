@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דף אישור סופי</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script> <!-- QRCode.js -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .message {
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #4CAF50; /* צבע ירוק לאישור */
+        }
+        .qr-code {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #007bff; /* כחול */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px; /* הפרדה בין כפתורים */
+        }
+        .btn:hover {
+            background-color: #0056b3; /* כחול כהה בעת ריחוף */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>אישור הזמנה</h2>
+    
+    <!-- הודעת אישור הזמנה -->
+    <div class="message">
+        <p>ההזמנה בוצעה בהצלחה! תודה על ההזמנה.</p>
+        <p>קוד הכניסה לחניון שלך:</p>
+    </div>
+
+    <!-- מיקום החניה -->
+    <p>מיקום החניה: קומה 2, אזור B, מס' חניה 45</p>
+
+    <!-- קוד QR -->
+    <div class="qr-code" id="qrcode"></div>
+
+    <p>קוד כניסה לחניון: <strong>ABC123</strong></p>
+
+    <!-- כפתורים לשליחה ב-SMS או למייל -->
+    <button class="btn" onclick="sendSMS()">שלח לי את ההזמנה ב-SMS</button>
+    <button class="btn" onclick="sendEmail()">שלח למייל</button>
+</div>
+
+<script>
+    // יצירת קוד QR דינמי לאחר שהדף נטען
+    window.onload = function() {
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "קוד כניסה לחניון: ABC123", // כאן תוכל לשנות את הטקסט של קוד ה-QR
+            width: 128,
+            height: 128,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    };
+
+    // פונקציות לשליחה ב-SMS או במייל
+    function sendSMS() {
+        alert('ההזמנה תישלח ב-SMS!');
+        // כאן אפשר להוסיף קוד לשליחה אמיתית ב-SMS דרך API חיצוני
+    }
+
+    function sendEmail() {
+        alert('ההזמנה תישלח למייל!');
+        // כאן אפשר להוסיף קוד לשליחה אמיתית במייל דרך API חיצוני
+    }
+</script>
+
+</body>
+</html>
